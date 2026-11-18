@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Um correio para Laly ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;
+ font-family:Georgia,serif;
+ color:#642536;
+ background:linear-gradient(145deg,#fff0f2,#f9d9df,#fff5f1);
+ overflow-x:hidden;
+}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;
+ background-image:radial-gradient(#d78b9c 1px,transparent 1px);
+ background-size:27px 27px;opacity:.23;
+}
+header{text-align:center;padding:55px 20px 25px}
+.heart{font-size:35px;animation:pulse 2s infinite}
+h1{font-size:clamp(30px,7vw,48px);font-weight:normal;margin:12px 0;color:#9b344e}
+.subtitle{font-style:italic;color:#9b6874;font-size:15px;line-height:1.7}
+.counter{
+ display:inline-block;margin-top:17px;padding:9px 18px;
+ border:1px solid #dba0ad;border-radius:30px;
+ font-size:13px;color:#97475b;background:#ffffff80
+}
+main{max-width:850px;margin:auto;padding:15px 20px 65px}
+.intro{text-align:center;line-height:1.9;font-size:15px;margin:15px auto 35px;max-width:540px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:17px}
+.envelope{
+ border:1px solid #e7b4bf;border-radius:15px;
+ background:#fffaf8;padding:24px 15px;
+ min-height:175px;cursor:pointer;
+ box-shadow:0 6px 20px #9c46521a;
+ transition:.3s;position:relative;
+}
+.envelope:hover{transform:translateY(-6px);box-shadow:0 12px 25px #9c465230}
+.envelope .emoji{font-size:38px}
+.envelope h3{font-weight:normal;font-size:18px;margin:13px 0 7px;color:#963b53}
+.envelope p{font-size:12px;color:#b17a85;margin:0}
+.seal{position:absolute;right:13px;top:13px;color:#c25a70}
+footer{text-align:center;padding:15px 20px 40px;font-size:13px;color:#a46d79;font-style:italic}
+.modal{
+ display:none;position:fixed;inset:0;background:#481b2dcc;
+ z-index:10;align-items:center;justify-content:center;padding:18px;
+ backdrop-filter:blur(5px)
+}
+.modal.show{display:flex}
+.letter{
+ width:min(100%,490px);max-height:85vh;overflow:auto;
+ background:#fff8f2;border-radius:8px;padding:35px 27px;
+ box-shadow:0 15px 70px #250b14;
+ position:relative;border:1px solid #edc4bb;
+ animation:appear .35s ease;
+}
+.letter:before{
+ content:"";position:absolute;inset:9px;border:1px solid #efd4cc;
+ pointer-events:none;border-radius:5px
+}
+.letter h2{font-weight:normal;text-align:center;color:#a23c54;font-size:25px}
+.letter .content{white-space:pre-line;line-height:2;font-size:15px;color:#69404a;margin:25px 3px}
+.close{
+ display:block;margin:20px auto 0;border:0;border-radius:25px;
+ background:#a43f57;color:white;padding:11px 25px;cursor:pointer;
+ font-family:inherit;font-size:14px
+}
+.signature{text-align:right;font-style:italic;color:#a34d62}
+@keyframes pulse{50%{transform:scale(1.15)}}
+@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:480px){header{padding-top:38px}.letter{padding:30px 22px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="heart">♥</div>
+ <h1>Correio para Laly</h1>
+ <div class="subtitle">Um lugar onde cada carta guarda<br>um pedacinho do que sinto por vc.</div>
+ <div class="counter">♡ 3 meses da nossa história ♡</div>
+</header>
+
+<main>
+ <div class="intro">
+  Benzinho, preparei algumas cartinhas pra vc.
+  Cada uma tem um motivo diferente, mas todas têm a mesma intenção:
+  fazer vc lembrar que existe alguém que fica feliz só por ter vc na vida.
+  Escolha uma e abra com carinho. ❤️
+ </div>
+ <div class="grid" id="letters"></div>
+</main>
+
+<footer>
+ Feito com carinho, especialmente para a garota mais linda. ♥
+</footer>
+
+<div class="modal" id="modal" onclick="outside(event)">
+ <div class="letter">
+  <h2 id="letterTitle"></h2>
+  <div class="content" id="letterContent"></div>
+  <div class="signature">Com todo meu carinho, de alguém que te adora. ♥</div>
+  <button class="close" onclick="closeLetter()">Guardar cartinha ♥</button>
+ </div>
+</div>
+
+<script>
+const cartas=[
+{
+ icon:"💌",
+ title:"Coisas que me fazem lembrar vc",
+ text:`ENHYPEN
+Porque sempre que vejo ou escuto algo relacionado, acabo lembrando de vc.
+
+VERMELHO
+Porque é sua cor favorita e, sinceramente, acho impossível olhar para essa cor sem pensar em vc.
+
+MAQUIAGEM
+Porque me faz lembrar de vc e de como até os pequenos detalhes combinam com sua beleza, e nao é ela que te deixa bonita e sim você quem deixa bonita a maquiagem.
+
+LAVAR O CABELO
+Porque você sempre reclama disso.
+
+SIGNIFICADO DE PERFEIÇÃO
+Porque, de alguma forma, quando penso na palavra "perfeição", minha cabeça sempre acaba chegando em vc.
+
+TAYLOR SWIFT
+Porque existem músicas que parecem ter sido feitas para descrever sentimentos que tenho por vc.
+
+ÁLCOOL
+Porque até essa palavra ganhou um espacinho na minha lista de coisas que me fazem lembrar de vc KKKKK.
+
+É engraçado como tantas coisas diferentes conseguem me levar até a mesma pessoa.
+
+Acho que esse é um dos efeitos mais bonitos de gostar de alguém: encontrar um pedacinho dela nas coisas mais inesperadas.
+
+E, no meu caso, esse alguém é vc. ❤️`
+},
+{
+ icon:"🌷",title:"Abra quando estiver triste(eu acho que eu nunca tive triste sem ser no começo, mas to prevenindo)",
+ text:`Minha princesa,
+
+Primeiro, respira um pouquinho, tá?
+
+Vc não precisa estar feliz o tempo inteiro. Não precisa fingir que está tudo bem e nem guardar tudo só pra vc.
+
+Quero que saiba que seus dias difíceis não fazem vc ser menos incrível. Vc continua sendo essa pessoa maravilhosa que eu tenho tanta sorte de conhecer.
+
+Se eu pudesse, tiraria um pouquinho desse peso dos seus ombros e ficaria do seu lado até tudo ficar mais leve.
+
+Vc merece cuidado, paciência, carinho e muitos motivos pra sorrir.
+
+Não esquece disso, benzinho. ♥`
+},
+{
+ icon:"🌹",title:"Quando esquecer o quanto é linda(eu sei que é impossivel)",
+ text:`Laly, sério, vc tem noção do quanto é linda?
+
+Seu cabelo vermelho, seu jeitinho que parece que saiu do hospício, seus olhos, parece que alguém resolveu colocar   beleza demais em uma pessoa só.
+
+Mas sabe uma coisa,  não é só sua aparência.
+
+É o jeito que vc conversa, suas brincadeiras, suas bobagens e até as coisas mais aleatórias que vc fala.
+
+Eu poderia passar um tempão falando sobre cada detalhe seu.
+
+E ainda assim provavelmente não conseguiria explicar direito o quanto vc é especial pra mim. ❤️`
+},
+{
+ icon:"☀️",title:"Abra quando quiser sorrir",
+ text:`Tenho uma reclamação formal contra vc.
+
+É completamente injusto uma pessoa ser tão bonita e ainda por cima ser engraçadinha desse jeito.
+
+Como se não bastasse, ainda conseguiu fazer alguém ficar sorrindo olhando pra uma tela igual um completo bobo.
+
+A senhora está sendo acusada de roubar minha atenção, ocupar meus pensamentos e causar saudade sem autorização.
+
+A pena é continuar sendo maravilhosa e receber muito carinho (uns xingos de leve as vezes).
+
+Não existe possibilidade de recurso KKKKKKKKKKKKK ❤️`
+},
+{
+ icon:"💗",title:"Quando quiser saber o que sinto",
+ text:`Eu te amo, Laly.
+
+Gosto de conversar com vc, de ouvir sobre seu dia, de saber das suas coisas e até de ficar falando sobre assuntos completamente sem sentido.
+Gosto de conhecer cada detalhe seu, inclusive aqueles que talvez vc nem perceba.
+E hoje completamos três meses desde que nos conhecemos, três meses que podem parecer pouco diante de uma vida inteira, mas que já guardam tantas coisas especiais pra mim.
+Obrigado por existir, por ser vc e por ter aparecido na minha história.
+Eu espero continuar cultivando esse carinho, um dia de cada vez.
+Feliz três meses, minha princesa.
+Eu gosto muito de vc, mais do que qualquer uma  dessas palavras conseguem mostrar.
+Esses três meses me fizeram perceber que conhecer alguém pode ser uma das coisas mais bonitas que acontecem na vida.
+E se eu pudesse voltar naquele primeiro dia em que a gente se conheceu, eu escolheria conhecer vc novamente.
+Porque, entre tantas pessoas no mundo, foi vc que tornou meus dias mais especiais. ❤️`
+},
+{
+ icon:"🏡",title:"Abra quando pensar no futuro",
+ text:`Às vezes eu fico imaginando pequenas coisas.
+
+Nós dois rindo de alguma besteira, conversando até perder a noção do tempo, dividindo momentos simples e criando lembranças que um dia vão virar histórias.
+
+Não sei exatamente como será o futuro, mas sei que existem muitas coisas que gostaria de viver ao seu lado.
+
+Não quero apressar o tempo. Quero aproveitar cada pedacinho do caminho com vc.
+
+E espero que ainda existam milhares de cartinhas pra escrever, tambem espero que essas sejam feitas à mão(faço um esforço pra fazer uma letra bonita). ♥`
+}
+];
+
+const container=document.getElementById("letters");
+cartas.forEach((c,i)=>{
+ const el=document.createElement("div");
+ el.className="envelope";
+ el.innerHTML=`<span class="seal">♥</span><div class="emoji">${c.icon}</div><h3>${c.title}</h3><p>Uma cartinha esperando por vc...</p>`;
+ el.onclick=()=>openLetter(i);
+ container.appendChild(el);
+});
+function openLetter(i){
+ document.getElementById("letterTitle").textContent=cartas[i].title;
+ document.getElementById("letterContent").textContent=cartas[i].text;
+ document.getElementById("modal").classList.add("show");
+}
+function closeLetter(){document.getElementById("modal").classList.remove("show")}
+function outside(e){if(e.target.id==="modal")closeLetter()}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLetter()});
+</script>
+</body>
+</html>
